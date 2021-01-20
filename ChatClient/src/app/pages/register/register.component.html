@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="container">
+    <h2 class="text-center" id="title">Chat Application</h2>
+    <br>
+    <hr>
+    <div class="row">
+      <div class="col-md-5">
+        <form  method="post"  #registerFrom="ngForm" (submit)="onRegisterSubmit()">
+          <fieldset>
+            <p class="text-uppercase pull-center"> SIGN UP.</p>
+            <div class="form-group">
+              <input class="form-control" name="Email" [(ngModel)]="registerUser.Email" placeholder="Email" required="">
+            </div>
+
+            <div class="form-group">
+              <input class="form-control" name="FirstName" [(ngModel)]="registerUser.FirstName" placeholder="First Name" required="">
+            </div>
+            <div class="form-group">
+              <input class="form-control" name="LastName" [(ngModel)]="registerUser.LastName"  placeholder="Last Name" required="">
+            </div>
+            <div>
+              <input type="submit" class="btn  btn-primary " [disabled]="registerFrom.invalid">
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="col-md-2">
+        <!-------null------>
+      </div>
+
+      <div class="col-md-5">
+        <form role="form" #loginForm="ngForm" (submit)="onLoginSubmit()">
+          <fieldset>
+            <p class="text-uppercase"> Login to your account: </p>
+
+            <div class="form-group">
+              <input type="email" name="loginEmail"  [(ngModel)]="loginEmail" id="loginEmail" class="form-control input-lg" placeholder="Email" required="">
+            </div>
+            <div>
+              <input type="submit" class="btn btn-success btn-md" value="Sign In" [disabled]="loginForm.invalid">
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

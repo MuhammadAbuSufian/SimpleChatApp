@@ -1,0 +1,82 @@
+<div class="container">
+  <br><br>
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="inbox_people">
+        <div class="headind_srch">
+          <div class="recent_heading">
+            <div class="row">
+              <div class="col-md-10">
+                <h4>{{userDetails.firstName}} {{userDetails.lastName}}</h4>
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-outline-secondary"
+                        data-toggle="tooltip" data-placement="top" title="LogOut"
+                        (click)="onLogout()"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="inbox_chat">
+          <div class="chat_list " [class.active_chat]="item.isActive" *ngFor="let item of users"  (click)="openChat(item)">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>{{item.firstName}} {{item.lastName}}<span class="chat_date">
+                    <span *ngIf="item.isOnline" class="online"></span>
+                    <span *ngIf="!item.isOnline"  class="offline"></span>
+                </span></h5>
+                <p>{{item.email}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mesgs" style="background: #f8f8f8 ">
+
+        <div class="row" style="height: 530px; overflow-y: scroll;">
+          <div class="col-md-12">
+            <h5 *ngIf="displayMessages.length == 0" class="heading_start_chating">Start Chatting</h5>
+            <div class="msg_history" *ngFor="let msg of displayMessages">
+              <div class="incoming_msg" *ngIf="msg.type==='recieved'">
+                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="received_msg">
+                  <div class="received_withd_msg">
+                    <p>{{msg.content}}</p>
+                    <span class="time_date"> {{msg.messageDate | date: 'short'}}</span></div>
+                </div>
+              </div>
+              <div class="outgoing_msg"  *ngIf="msg.type==='sent'">
+                <div class="sent_msg">
+                  <p>{{msg.content}}</p>
+                  <span class="time_date"> {{msg.messageDate | date: 'short'}}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" >
+          <div class="col-md-12">
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <input type="text"  [(ngModel)]="message" class="write_msg" placeholder="Type a message" />
+                <button class="msg_send_btn" type="button" (click)="SendDirectMessage()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div></div>
