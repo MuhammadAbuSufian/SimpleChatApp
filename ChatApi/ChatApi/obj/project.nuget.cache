@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WRZ7MzUgE3oaEQEqh56+7ueudykW7fjyJysLLaQeF26/HC4ZroX0/tW0/UyNodivRze7sx6wXJZCeKHFkUdlYw==",
+  "dgSpecHash": "zug8x62JWJ8pY+UocGi6xP+jCdARr06+s0rez0s/wJCkEoY2Mv2VAE2D3XRfOM6+fc+tujxFa3QXE4JBT33M/g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hi\\Desktop\\ChatApp\\New folder\\ChatApi\\ChatApi\\ChatApi.csproj",
+  "projectFilePath": "C:\\Users\\Hi\\Desktop\\ChatApp\\SimpleChatApp\\ChatApi\\ChatApi\\ChatApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Hi\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

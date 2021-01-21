@@ -6339,11 +6339,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hi\\Desktop\\ChatApp\\New folder\\ChatApi\\ChatApi\\ChatApi.csproj",
+      "projectUniqueName": "C:\\Users\\Hi\\Desktop\\ChatApp\\SimpleChatApp\\ChatApi\\ChatApi\\ChatApi.csproj",
       "projectName": "ChatApi",
-      "projectPath": "C:\\Users\\Hi\\Desktop\\ChatApp\\New folder\\ChatApi\\ChatApi\\ChatApi.csproj",
+      "projectPath": "C:\\Users\\Hi\\Desktop\\ChatApp\\SimpleChatApp\\ChatApi\\ChatApi\\ChatApi.csproj",
       "packagesPath": "C:\\Users\\Hi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hi\\Desktop\\ChatApp\\New folder\\ChatApi\\ChatApi\\obj\\",
+      "outputPath": "C:\\Users\\Hi\\Desktop\\ChatApp\\SimpleChatApp\\ChatApi\\ChatApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

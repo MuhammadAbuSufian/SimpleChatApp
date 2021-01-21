@@ -32,7 +32,7 @@ namespace ChatApi
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("http://localhost:4000")
+                options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("http://localhost:4200")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
