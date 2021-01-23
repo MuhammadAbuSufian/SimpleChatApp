@@ -23,14 +23,14 @@ with the following functionalities:
  # Getting Started
  This following application/tools need to be install in computer as prerequisite
   
- ### Prerequisites
+ ## Prerequisites
   1. Install [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) (skip if already installed)
   2. Install [Node.js LTS](https://nodejs.org/en/) (skip if already installed)
   3. Install [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)  (skip if already installed)
   4. Install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)  (skip if already installed)
   
   
-  # Setup Appication
+  ## Setup Appication
   Clone the repository with 'git clone https://github.com/saykat/SimpleChatApp.git' command or download project as zip from 'https://github.com/saykat/SimpleChatApp'
   
   ### Run Angular Application
