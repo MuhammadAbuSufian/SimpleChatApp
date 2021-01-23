@@ -21,15 +21,13 @@ namespace ChatApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _service.GetAll();
-            return Ok(result);
+            return Ok(await _service.GetAllOrderByMessage());
         }
 
         [HttpGet("received-messages/{userId}")]
         public async Task<IActionResult> GetUserReceivedMessages(string userId)
         {
-            var result = _service.GetMessagesByUserId(userId);
-            return Ok(result);
+            return Ok(await _service.GetMessagesByUserId(userId));
         }
     }
 }

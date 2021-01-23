@@ -1,4 +1,7 @@
-﻿using ChatApi.Models;
+﻿using ChatApi.Data.Repositories;
+using ChatApi.Models;
+using ChatApi.Models.RequestModels;
+using ChatApi.Models.ViewModels;
 using DotNetCoreApiStarter.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,33 +11,35 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Services
 {
-    public interface IMessageService
+    public interface IMessageService : IBaseService<Message, MessageViewModel, MessageRequestModel>
     {
-        void Save(Message model);
         Task<List<Message>> GetMessagesByUserId(string id);
-        Task<List<Message>> GetAll();
+        Task<List<Message>> GetAllOrderByMessage();
+        public Message GetMessage(Message msg);
     }
-    public class MessageService : IMessageService
+    public class MessageService : BaseService<Message, MessageViewModel, MessageRequestModel>, IMessageService
     {
-        private readonly BusinessDbContext _context;
-        public MessageService(BusinessDbContext context)
+        private readonly IMessageRepository _repository;
+        public MessageService(IMessageRepository repository): base(repository)
         {
-            _context = context;
+            _repository = repository;
         }
-        public void Save(Message model)
-        {
-            _context.Messages.Add(model);
-            _context.SaveChanges();
-        }
+       
         public async Task<List<Message>> GetMessagesByUserId(string id)
         {
-            var result = await _context.Messages.AsQueryable().Where(x => x.Receiver == id).OrderBy(x=>x.MessageDate).ToListAsync();
+            return await _repository.GetAll().Where(x => x.Receiver == id).OrderBy(x => x.MessageDate).ToListAsync(); ;
+        }
+        public async Task<List<Message>> GetAllOrderByMessage()
+        {
+            var result = await _repository.GetAll().OrderBy(x => x.MessageDate).ToListAsync();
             return result;
         }
-        public async Task<List<Message>> GetAll()
+
+        public Message GetMessage(Message msg)
         {
-            var result = await _context.Messages.OrderBy(x => x.MessageDate).ToListAsync();
-            return result;
+            var message = _repository.GetAll().Where(x => x.Content == msg.Content && x.Sender == msg.Sender &&
+            x.Receiver == msg.Receiver && x.MessageDate == msg.MessageDate).FirstOrDefault();
+            return message;
         }
     }
 }

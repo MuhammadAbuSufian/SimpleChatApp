@@ -45,12 +45,20 @@ namespace ChatApi.Hubs
             await base.OnConnectedAsync();
         }
 
-        public Task SendMessageToUser(Message message)
+        public  Task SendMessageToUser(Message message)
         {
             var reciever = Users.FirstOrDefault(x => x.UserId == message.Receiver);
             var connectionId = reciever == null ? "no one recive this message" : reciever.ConnectionId;
-            _service.Save(message);
+            _service.AddSync(message);
             return Clients.Client(connectionId).SendAsync("ReceiveDM", Context.ConnectionId, message);
+        }
+        public Task DeleteForEveryone(Message message)
+        {
+            var reciever = Users.FirstOrDefault(x => x.UserId == message.Receiver);
+            var connectionId = reciever == null ? "no one recive this message" : reciever.ConnectionId;
+            var msg = _service.GetMessage(message);
+            _service.Delete(msg);
+            return Clients.Client(connectionId).SendAsync("DeleteForEveryoneDM", Context.ConnectionId, msg);
         }
         public void RemoveOnlineUser(string userID)
         {

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using ChatApi.Hubs;
 using Microsoft.AspNetCore.Http.Connections;
+using ChatApi.Data.Repositories;
 
 namespace ChatApi
 {
@@ -40,8 +41,10 @@ namespace ChatApi
             });
 
             services.AddDbContext<BusinessDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IMessageService, MessageService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IMessageRepository, MessageRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IMessageService, MessageService>();
             services.AddSignalR();
             services.AddControllers();
         }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using ChatApi.Models;
 using ChatApi.Models.RequestModels;
 using ChatApi.Services;
-using DotNetCoreApiStarter.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -22,41 +22,38 @@ namespace ChatApi.Controllers
        
         private readonly IUserService _service;
 
-        const string password = "default123@^";
-
         public UserController(IUserService service)
         {
             _service = service;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _service.GetAll();
-            return Ok(result);
+            return Ok(await _service.GetAll());
         }
 
         [HttpPost]
         [Route("Register")]
         //POST : /api/User/Register
-        public async Task<Object> Register(UserCreateRequestModel model)
+        public async Task<IActionResult> Register(UserCreateRequestModel model)
         {
-            var newUser = new ApplicationUser();
-            newUser.FirstName = model.FirstName;
-            newUser.LastName = model.LastName;
-            newUser.Email = model.Email;
-            newUser.IsOnline = model.IsOnline;
-            var emailAlreadyExist = await _service.GetByEmail(newUser.Email);
+            var createUSer = new User();
+            createUSer.FirstName = model.FirstName;
+            createUSer.LastName = model.LastName;
+            createUSer.Email = model.Email;
+            createUSer.IsOnline = model.IsOnline;
+            var emailAlreadyExist = await _service.GetByEmail(createUSer.Email);
             if(emailAlreadyExist != null)
             {
                 return Ok(null);
             }
-            return Ok(await _service.Save(newUser));
+            return Ok(await _service.Add(createUSer));
         }
 
         [HttpPost]
         [Route("Login")]
+        //POST : /api/User/Login
         public async Task<IActionResult> Login(LoginRequestModel model)
         {
             var user = await _service.GetByEmail(model.Email);
@@ -88,7 +85,7 @@ namespace ChatApi.Controllers
                 }
             }
             else
-                return BadRequest(new { message = "Username or password is incorrect." });
+                return BadRequest(new { message = "Email is Not Valid." });
         }
     }
 }

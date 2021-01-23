@@ -123,7 +123,6 @@ C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\bin\Debug\netcoreapp3.
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.csprojAssemblyReference.cache
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.AssemblyInfoInputs.cache
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.AssemblyInfo.cs
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.csproj.CoreCompileInputs.cache
@@ -135,3 +134,4 @@ C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.dll
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.pdb
 C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.genruntimeconfig.cache
+C:\Users\Hi\Desktop\ChatApp\SimpleChatApp\ChatApi\ChatApi\obj\Debug\netcoreapp3.1\ChatApi.csprojAssemblyReference.cache

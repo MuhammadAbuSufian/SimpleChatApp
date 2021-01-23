@@ -18,15 +18,10 @@ export class HomeComponent implements OnInit {
   displayMessages: any[] = [];
   message: any;
   hubConnection: any;
-  UserID: any = this.userDetails.Id;
   UserConnectionID: any;
-  UsersFullName: any;
-  UsersConnectionId: any;
-  selectedUser = 0;
-  usersss: any;
   sender: any;
   connectedUsers: any[] = [];
-
+  deletedId = '';
   constructor(
     private router: Router,
     private userService: UserService,
@@ -104,6 +99,22 @@ export class HomeComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.displayMessages = this.messages.filter(x => ( x.type == 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id));
     });
+
+    this.hubConnection.on('DeleteForEveryoneDM', (connectionId: any, message: any) => {
+      message.isActive = false;
+      this.messages.forEach((msg) => {
+        if ( msg.id === message.id){
+          msg.isActive = false;
+        }
+      });
+      this.chatUser  = this.users.find((x: any) => x.id == message.sender);
+      // this.users.forEach((item: any) => {
+      //   item.isActive = false;
+      // });
+      // user.isActive = true;
+      // tslint:disable-next-line:max-line-length
+      this.displayMessages = this.messages.filter(x => (( x.type == 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+    });
   }
 
   openChat(user: any): void{
@@ -130,13 +141,13 @@ export class HomeComponent implements OnInit {
   SendDirectMessage(): void{
     if ( this.message != '' && this.message.trim() != '')
     {
-      const connectedUser = this.connectedUsers.find((x) => x.email === this.chatUser.userName);
       const msg = {
         sender: this.userDetails.id,
         receiver: this.chatUser.id,
         messageDate: new Date(),
         type: 'sent',
-        content: this.message
+        content: this.message,
+        isActive: true
       };
       this.messages.push(msg);
       this.displayMessages = this.messages.filter((x) => (x.type === 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id));
@@ -157,6 +168,31 @@ export class HomeComponent implements OnInit {
       .catch((err: any) => console.error(err));
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  setDelete(id: string): void{
+    this.deletedId = id;
+  }
+
+  deleteForEveryone(id: string): void {
+    let deleteMessage: any = null;
+    this.messages.forEach( msg => {
+      if ( msg.id === id ) {
+        deleteMessage = msg;
+        console.log(msg);
+      }
+    });
+    deleteMessage.type = undefined;
+    this.hubConnection.invoke('DeleteForEveryone', deleteMessage)
+      .then(() => {
+        deleteMessage.isActive = false;
+        this.displayMessages = this.messages.filter(x => (( x.type == 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+        console.log('Message deleted');
+      })
+      .catch((err: any) => console.error(err));
+  }
+  deleteForMe(): void {
+
   }
 
 }

@@ -1,6 +1,8 @@
-﻿using ChatApi.Models.RequestModels;
+﻿using ChatApi.Data.Repositories;
+using ChatApi.Models;
+using ChatApi.Models.RequestModels;
+using ChatApi.Models.ViewModels;
 using DotNetCoreApiStarter.Data;
-using DotNetCoreApiStarter.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,37 +11,23 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Services
 {
-    public interface IUserService
+    public interface IUserService : IBaseService<User, UserViewModel, UserRequestModel>
     {
-        Task<int> Save(ApplicationUser model);
-        Task<List<ApplicationUser>> GetAll();
-        Task<ApplicationUser> GetByEmail(string email);
+        Task<UserViewModel> GetByEmail(string email);
     }
-    public class UserService: IUserService
+    public class UserService : BaseService<User, UserViewModel, UserRequestModel>, IUserService
     {
-        private readonly BusinessDbContext _context;
-        public UserService(BusinessDbContext context)
+        private readonly IUserRepository _repositoy;
+        public UserService(IUserRepository repository) : base(repository)
         {
-            _context = context;
+            _repositoy = repository;
         }
-
-        public async Task<int> Save(ApplicationUser model)
+        
+        public async Task<UserViewModel> GetByEmail(string email)
         {
-            _context.ApplicationUsers.Add(model);
-            var result = await _context.SaveChangesAsync();
-            return result;
-        }
-
-        public async Task<List<ApplicationUser>> GetAll()
-        {
-            var result = await _context.ApplicationUsers.ToListAsync();
-            return result;
-        }
-
-        public async Task<ApplicationUser> GetByEmail(string email)
-        {
-            var result = await _context.ApplicationUsers.AsQueryable().Where(x => x.Email == email).FirstOrDefaultAsync();
-            return result;
+            var user = await _repositoy.GetAll().Where(x => x.Email == email).FirstOrDefaultAsync();
+            if (user != null) return new UserViewModel(user);
+            return null;
         }
     }
 }

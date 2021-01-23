@@ -16,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Data\Repositories\" />
-    <Folder Include="Models\RequestModels\" />
-    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 

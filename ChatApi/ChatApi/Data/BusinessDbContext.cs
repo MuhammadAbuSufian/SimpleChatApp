@@ -1,5 +1,4 @@
 ﻿using ChatApi.Models;
-using DotNetCoreApiStarter.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace DotNetCoreApiStarter.Data
             : base(options)
         { }
 
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<User> users { get; set; }
         public DbSet<Message> Messages { get; set; }
     }
 }

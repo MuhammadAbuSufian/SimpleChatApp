@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DotNetCoreApiStarter.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNetCoreApiStarter.Controllers
+namespace ChatApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Models
 {
-    public class Message
+    public class Message: BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
         public string Sender { get; set; }
         public string Receiver { get; set; }
         public DateTime MessageDate { get; set; }
         public string Content { get; set; }
         public bool IsNew { get; set; }
+        public bool IsDeletedForMe { get; set; }
     }
 }
