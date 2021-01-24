@@ -11,7 +11,7 @@ export class MessageService {
   constructor(private http: HttpClient){  }
 
   getUserReceivedMessages(userId: string): Observable<any> {
-    return this.http.get(environment.apiBaseUrl + '/message');
+    return this.http.get(environment.apiBaseUrl + '/message/received-messages/' + userId);
   }
 
 }

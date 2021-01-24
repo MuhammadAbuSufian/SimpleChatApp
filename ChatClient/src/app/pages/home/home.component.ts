@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {MessageService} from '../../services/message.service';
@@ -11,6 +11,8 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  // @ts-ignore
+  @ViewChild('messagebox') private chatArea: ElementRef;
   userDetails = JSON.parse( localStorage.getItem('login-user') as string);
   users: any;
   chatUser: any;
@@ -96,8 +98,8 @@ export class HomeComponent implements OnInit {
       });
       const user = this.users.find((x: any) => x.id === this.chatUser.id);
       user.isActive = true;
-      // tslint:disable-next-line:max-line-length
-      this.displayMessages = this.messages.filter(x => ( x.type == 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id));
+      this.displayMessages = this.messages.filter(x => (( x.type === 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+      this.scrollToBottom();
     });
 
     this.hubConnection.on('DeleteForEveryoneDM', (connectionId: any, message: any) => {
@@ -108,12 +110,7 @@ export class HomeComponent implements OnInit {
         }
       });
       this.chatUser  = this.users.find((x: any) => x.id == message.sender);
-      // this.users.forEach((item: any) => {
-      //   item.isActive = false;
-      // });
-      // user.isActive = true;
-      // tslint:disable-next-line:max-line-length
-      this.displayMessages = this.messages.filter(x => (( x.type == 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+      this.displayMessages = this.messages.filter(x => (( x.type === 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
     });
   }
 
@@ -124,7 +121,8 @@ export class HomeComponent implements OnInit {
     user.isActive = true;
     this.chatUser = user;
     // tslint:disable-next-line:max-line-length
-    this.displayMessages = this.messages.filter(x => (x.type == 'sent' && x.receiver === this.chatUser.id) || (x.type === 'recieved' && x.sender === this.chatUser.id));
+    this.displayMessages = this.messages.filter(x => (( x.type === 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+    this.scrollToBottom();
   }
 
   makeItOnline(): void{
@@ -150,12 +148,13 @@ export class HomeComponent implements OnInit {
         isActive: true
       };
       this.messages.push(msg);
-      this.displayMessages = this.messages.filter((x) => (x.type === 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id));
-
+      this.displayMessages = this.messages.filter(x => (( x.type === 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+      this.scrollToBottom();
       this.hubConnection.invoke('SendMessageToUser', msg)
         .then(() => console.log('Message to user Sent Successfully'))
         .catch((err: any) => console.error(err));
       this.message = '';
+      this.scrollToBottom();
     }
   }
 
@@ -167,6 +166,7 @@ export class HomeComponent implements OnInit {
       })
       .catch((err: any) => console.error(err));
     localStorage.removeItem('token');
+    localStorage.removeItem('login-user');
     this.router.navigate(['/login']);
   }
 
@@ -174,25 +174,31 @@ export class HomeComponent implements OnInit {
     this.deletedId = id;
   }
 
-  deleteForEveryone(id: string): void {
+  deleteForEveryone(content: string, messageDate: any): void {
     let deleteMessage: any = null;
     this.messages.forEach( msg => {
-      if ( msg.id === id ) {
+      if ( msg.content === content && msg.messageDate === messageDate ) {
         deleteMessage = msg;
-        console.log(msg);
       }
     });
     deleteMessage.type = undefined;
     this.hubConnection.invoke('DeleteForEveryone', deleteMessage)
       .then(() => {
         deleteMessage.isActive = false;
-        this.displayMessages = this.messages.filter(x => (( x.type == 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+        this.displayMessages = this.messages.filter(x => (( x.type === 'sent' && x.receiver === this.chatUser.id) || ( x.type === 'recieved' && x.sender === this.chatUser.id)) && x.isActive === true);
+        this.scrollToBottom();
         console.log('Message deleted');
       })
       .catch((err: any) => console.error(err));
   }
   deleteForMe(): void {
 
+  }
+
+  scrollToBottom(): void{
+    setTimeout(() => {
+      this.chatArea.nativeElement.scrollTop = this.chatArea.nativeElement.scrollHeight;
+    }, 100 );
   }
 
 }

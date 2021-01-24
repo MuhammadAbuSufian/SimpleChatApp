@@ -4,13 +4,13 @@
     <h4 class="text-uppercase pull-center" style=" text-align: center; font-weight: bold; font-family: system-ui; color: #27586c;"> Register</h4>
     <form class="form-signin"  method="post"  #registerFrom="ngForm" (submit)="onRegisterSubmit()">
       <span id="reauth-email" class="reauth-email"></span>
-      <input class="form-control" name="Email" [(ngModel)]="registerUser.Email" placeholder="Email" required="">
+      <input class="form-control" type="email" name="Email" [(ngModel)]="registerUser.Email" placeholder="Email" required="">
       <br>
       <input class="form-control" name="LastName" [(ngModel)]="registerUser.LastName"  placeholder="Last Name" required="">
       <br>
       <input class="form-control" name="FirstName" [(ngModel)]="registerUser.FirstName" placeholder="First Name" required="">
       <br>
-      <button [disabled]="registerFrom.invalid" style="cursor: pointer"
+      <button [disabled]="registerFrom.invalid"
         class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign Up</button>
     </form><!-- /form -->
     <a [routerLink]="['/login']" class="forgot-password">

@@ -24,10 +24,10 @@ namespace ChatApi.Services
         {
             _repository = repository;
         }
-       
+
         public async Task<List<Message>> GetMessagesByUserId(string id)
         {
-            return await _repository.GetAll().Where(x => x.Receiver == id).OrderBy(x => x.MessageDate).ToListAsync(); ;
+            return await _repository.GetAll().Where(x => x.Receiver == id || x.Sender == id).OrderBy(x => x.MessageDate).ToListAsync(); ;
         }
         public async Task<List<Message>> GetAllOrderByMessage()
         {
