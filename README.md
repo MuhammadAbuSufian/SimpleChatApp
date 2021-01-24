@@ -40,9 +40,9 @@ with the following functionalities:
   
   ### Run DOT.NET Core Application
    1. Open project folder and move to ChatApi directory then click on ChatApi.sln to open the project with visual studio.
-   2. Open appsettings.json and configure it if it is needed. Usally do not neet to change the database if the same database does not exist 
-      "ConnectionStrings": {
-        "Default": "Server=(local);Database=ChatAppDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+   2. Open appsettings.json and configure it if it is needed. Usally do not neet to change the database if the same database does not exist <br>
+      "ConnectionStrings": {<br>
+        "Default": "Server=(local);Database=ChatAppDb;Trusted_Connection=True;MultipleActiveResultSets=true"<br>
       } 
    3. Run 'update-database' from package maneger console to migrate database.
    4. After migration is done, Run the project with visual studio and project will be run on localhost port:44385.
