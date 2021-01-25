@@ -31,12 +31,7 @@ with the following functionalities:
   
   
   ## Setup Appication
-  Clone the repository with 'git clone https://github.com/saykat/SimpleChatApp.git' command or download project as zip from 'https://github.com/saykat/SimpleChatApp'
-  
-  ### Run Angular Application
-   1. Open project folder and move to ChatClient directory and click shift and mouse right button together then open from here power-shell/command-prompt.
-   2. Run 'npm install' to install all the node packages for the angular appication.
-   3. Run 'npm start' command to run the application on 'http://localhost:4200'
+  Clone the repository with 'git clone https://github.com/saykat/SimpleChatApp.git' command if git cli is installed or download project as zip from 'https://github.com/saykat/SimpleChatApp'
   
   ### Run DOT.NET Core Application
    1. Open project folder and move to ChatApi directory then click on ChatApi.sln to open the project with visual studio.
@@ -46,3 +41,8 @@ with the following functionalities:
       } 
    3. Run 'update-database' from package maneger console to migrate database.
    4. After migration is done, Run the project with visual studio and project will be run on localhost port:44385.
+   
+   ### Run Angular Application
+   1. Open project folder and move to ChatClient directory and click shift and mouse right button together then open from here power-shell/command-prompt.
+   2. Run 'npm install' to install all the node packages for the angular appication.
+   3. Run 'npm start' command to run the application on 'http://localhost:4200'
